@@ -5,10 +5,7 @@ import time
 
 def take_off_and_land():
 
-
-    rospy.loginfo('TESTESTESTEST')
-
-    rospy.init_mode('mavros_takeoff_python')
+    rospy.init_node('mavros_takeoff_python')
     rate = rospy.Rate(10)
 
     ####
@@ -17,7 +14,7 @@ def take_off_and_land():
     rospy.wait_for_service('/mavros/set_mode')
     try:
         change_mode = rospy.ServiceProxy('/mavros/set_mode', SetMode)
-        resp = change_mode(custom_mode="GUIDED", base_mode="0")
+        resp = change_mode(custom_mode="GUIDED")
         print "setmode send ok %s"%resp.success
     except rospy.ServiceException, e:
         print "Failed SetMode: %s"%e
